@@ -2,9 +2,43 @@
 const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
 
-// Your JavaScript code goes here!
+const heartElements = document.querySelectorAll('.like-glyph')
 
+//Your JavaScript code goes here!
 
+heartElements.forEach(item => { item.addEventListener('click', e => {
+  if (e.target.innerText === FULL_HEART){
+    toggleHeart(e.target)
+  } else {
+    mimicServerCall('aRandamURL')
+    .then(response => {
+      toggleHeart(e.target)})
+    .catch(error => {
+      showError()})
+  }})
+})
+
+// heartButton.forEach(item => {item.addEventListener('click', e => {
+//   e.target(activateHeart)
+// })})
+
+function showError() {
+  let element = document.getElementById('modal');
+  element.className = ''
+  setTimeout(() => element.className = 'hidden', 3000)
+}
+
+function toggleHeart(heartElement){
+  if (heartElement.innerText !== FULL_HEART){
+    heartElement.innerText = FULL_HEART
+    heartElement.className = 'activated-heart'
+  } else {
+    heartElement.innerText = EMPTY_HEART
+    heartElement.className = ''
+  }
+}
+// const heartElements = documentQuerySelectorAll('heart-glyph')
+// HeartElements.addEventListner('click', handleClick())
 
 
 //------------------------------------------------------------------------------
